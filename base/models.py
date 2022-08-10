@@ -1,6 +1,7 @@
 import os.path
 
 from django.db import models
+from django.core.validators import RegexValidator
 import uuid
 
 
@@ -98,4 +99,23 @@ class WhyUs(models.Model):
     class Meta:
         ordering = ('num_reason', )
 
+
+class UserReservation(models.Model):
+    mobile_re = RegexValidator(regex=r'^(\d{3}[- ]?){2}\d{4}$', message='Phone in format xxx xxx xxxx')
+    email_re = RegexValidator(regex=r'^[^-_][a-zA-Z0-9_-]+@\w+\.\w+$', message='Email in format xxxxxx@xx.xx')
+    name = models.CharField(max_length=50)
+    phone = models.CharField(max_length=15, validators=[mobile_re])
+    persons = models.PositiveSmallIntegerField()
+    message = models.TextField(max_length=500, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+    is_processed = models.BooleanField(default=False)
+    email = models.CharField(max_length=50, validators=[email_re])
+    book_date = models.DateField()
+    book_time = models.TimeField()
+
+    class Meta:
+        ordering = ('-date', '-is_processed')
+
+    def __str__(self):
+        return f'{self.name}, {self.phone}: {self.message[:50]}'
 

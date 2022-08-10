@@ -1,27 +1,19 @@
-from django.shortcuts import render, HttpResponse
-
+from django.shortcuts import render, HttpResponse, redirect
+from base.models import UserReservation
 # Create your views here.
 
 
 def manager(request):
-    return HttpResponse('Hello from manager page')
+    return HttpResponse('')
 
 
-def menu(request):
-    pass
+def reservations_list(request):
+    lst = UserReservation.objects.filter(is_processed=False)
+    return render(request, 'reservations_list.html', context={
+        'lst': lst
+    })
 
 
-def specials(request):
-    pass
-
-
-def events(request):
-    pass
-
-
-def gallery(request):
-    pass
-
-
-def bookatable(request):
-    return HttpResponse()
+def update_reservation(request, pk):
+    UserReservation.objects.filter(pk=pk).update(is_processed=True)
+    return redirect('manager:reservations_list')

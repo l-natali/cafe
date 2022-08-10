@@ -17,13 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from manager.views import manager
 from base.views import base
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('customer/', include('customer.urls')),
-    path('manager/', manager),
+    path('manager/', include('manager.urls')),
     path('', base)
 ]
 
