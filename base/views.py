@@ -9,7 +9,7 @@ def base(request):
         reservation = UserReservationForm(request.POST)
         if reservation.is_valid():
             reservation.save()
-            return redirect('/')
+            return redirect('/', context={'reservation_form': reservation})
 
     categories = Category.objects.filter(is_visible=True)
     dishes = Dish.objects.filter(is_visible=True)
