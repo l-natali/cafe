@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .models import Category, Dish, WhyUs, About, Event
+from .models import Category, Dish, WhyUs, About, Event, Gallery
 from .forms import UserReservationForm
 
 
@@ -17,6 +17,7 @@ def base(request):
     why_us = WhyUs.objects.all()
     about = About.objects.all()
     events = Event.objects.all()
+    gallery = Gallery.objects.all()
     reservation = UserReservationForm()
 
     data = {'categories': categories,
@@ -26,5 +27,6 @@ def base(request):
             'about': about,
             'events': events,
             'reservation_form': reservation,
+            'gallery': gallery,
             }
     return render(request, 'base.html', context=data)
