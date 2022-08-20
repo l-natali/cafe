@@ -9,11 +9,11 @@
 
         <div class="row g-0">
 
-            {% for img in gallery %}
+            {% for photo in gallery %}
                 <div class="col-lg-3 col-md-4">
                     <div class="gallery-item">
-                        <a href="{{ img.img.url }}" class="gallery-lightbox">
-                            <img src="{{ img.img.url }}" alt="" class="img-fluid">
+                        <a href="{{ photo.img.url }}" class="gallery-lightbox">
+                            <img src="{{ photo.img.url }}" alt="" class="img-fluid">
                         </a>
                     </div>
                 </div>
