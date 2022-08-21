@@ -32,6 +32,7 @@ class RegistrationUserForm(forms.ModelForm):
 
     def clean_password2(self):
         data = self.cleaned_data
+        print('form')
 
         if data['password'] == ['password2']:
             return data['password2']
