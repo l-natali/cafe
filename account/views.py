@@ -21,6 +21,7 @@ def login_view(request):
 
 def registration_view(request):
     form = RegistrationUserForm(request.POST or None)
+    print('form')
 
     if form.is_valid():
         new_user = form.save(commit=False)
